@@ -4,10 +4,10 @@
 
 ### Deployment Test
 
-- [ci/cd GitHub Actions]().
+- [ci/cd GitHub Actions](https://github.com/MohammadAljadayh/basic-api-server/actions).
 - [herokuapp Link Main ]().
-- [pull request]().
-- [Main Repo link]() 
+- [pull request](https://github.com/MohammadAljadayh/basic-api-server/pull/1).
+- [Main Repo link](https://github.com/MohammadAljadayh/basic-api-server/tree/dev).
 
 ## Setup 
 
