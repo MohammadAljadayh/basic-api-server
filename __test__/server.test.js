@@ -3,6 +3,16 @@
 const { server } = require('../src/server'); 
 const supertest = require('supertest');
 const mockRequest = supertest(server);
+const {db} = require('../src/models/index');
+
+beforeAll(async () => {
+  await db.sync();
+});
+
+// after all the tests are done
+afterAll(async () => {
+  await db.drop();
+});
 
 describe('TEST ALL', () => {
   test('/Root', async () => {
@@ -23,7 +33,7 @@ describe('TEST ALL', () => {
 
   // Check if 404 is handled 
 
-  test('Should respond with 404 status on an invalid method', async () => {
+test('Should respond with 404 status on an invalid method', async () => {
 
     const response = await mockRequest.get('/notfound');
     expect(response.status).toBe(404);
@@ -39,36 +49,80 @@ describe('TEST ALL', () => {
     expect(response.status).toBe(404);
   });
 
-  let obj = {
-    name: "mansaff",
-   country: "jordan",
-  };
- 
+  
+});
 
-   
-    it("food get test", async () => {
-      const response = await mockRequest.get(`/food`);
+describe('TEST FOOD', () => {
+
+let obj = {
+  foodName: "mansaff",
+ country: "jordan",
+};
+ let id=1;
+
+
+it("food post test", async () => {
+  console.log(obj);
+  const response = await mockRequest.post(`/food`).send(obj)
+  expect(response.status).toEqual(201);
+});
+
+
+ it("food get test", async () => {
+    const response = await mockRequest.get(`/food`);
+    expect(response.status).toEqual(200);
+  });
+
+  
+  it("food delete test", async () => {
+    const response = await mockRequest.delete(`/food/${id}`);
+    expect(response.status).toEqual(204);
+    
+  });
+
+  
+  // it("food update test", async () => {
+  //   const response = await mockRequest.put(`/food/${id}`).send(obj);
+  //   expect(response.status).toEqual(200);
+  // });
+
+
+});
+
+
+describe('TEST clothes', () => {
+
+  let obj = {
+    clothesName: "addidas",
+    color: "red",
+  };
+   let id=1;
+  
+  
+  it("clothes post test", async () => {
+    console.log(obj);
+    const response = await mockRequest.post(`/clothes`).send(obj)
+    expect(response.status).toEqual(201);
+  });
+  
+  
+   it("clothes get test", async () => {
+      const response = await mockRequest.get(`/clothes`);
       expect(response.status).toEqual(200);
     });
   
     
-    it("food post test", async () => {
-      const response = await mockRequest.post(`/food`).send(obj);
-      id=response.body.id;
-      console.log(response.body);
-      expect(response.status).toEqual(201);
-    });
-  
-    
-    it("food update test", async () => {
-      const response = await mockRequest.put(`/food/${id}`).send(obj);
-      expect(response.status).toEqual(200);
-    });
-  
-     it("food delete test", async () => {
-      const response = await mockRequest.delete(`/food/${id}`);
+    it("clothes delete test", async () => {
+      const response = await mockRequest.delete(`/clothes/${id}`);
       expect(response.status).toEqual(204);
       
     });
-
-});
+  
+    
+    // it("food update test", async () => {
+    //   const response = await mockRequest.put(`/food/${id}`).send(obj);
+    //   expect(response.status).toEqual(200);
+    // });
+  
+  
+  })

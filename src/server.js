@@ -3,7 +3,6 @@
 const express = require('express');
 const app = express();
 
-
 const notFoundHandler = require('./erorr-handlers/404');
 const errHandler = require('./erorr-handlers/500');
 const validatorMiddleware = require('./middleware/validator');
@@ -12,10 +11,12 @@ const loggerMiddleware = require('./middleware/logger');
 const foodRouter = require('./routes/food')
 const clothesRouter = require('./routes/clothes')
 
+app.use(express.json());
+
 app.use(loggerMiddleware); 
 
-app.use(foodRouter)
-app.use(clothesRouter)
+app.use(foodRouter);
+app.use(clothesRouter);
 
 app.get('/', (req, res) => {
   res.status(200).send('Hello this is home root');

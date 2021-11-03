@@ -17,11 +17,10 @@ foodRouter.delete('/food/:id', deleteFood);
 
 async function createFood(req, res) {
   let obj = req.body;
- 
   let newFood = await Food.create(obj);
-  console.log("-----------------------------------------");
+ 
   console.log(obj);
-  console.log("-----------------------------------------");
+ 
 
   res.status(201).json(newFood);
 }

@@ -30,13 +30,14 @@
         "country" : "jordan" 
         }
 
-- Endpoint: `/food/1`
+- Endpoint: `/clothes/1`
 
   - Returns Object
 
         {
-   "companyName":" ",
-    "color":" ",
+  clothesName: "addidas",
+    color: "red",
+  };
         }
 
 

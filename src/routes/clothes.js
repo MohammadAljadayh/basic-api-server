@@ -16,6 +16,8 @@ clothesRouter.delete('/clothes/:id', deleteClothes);
 
 async function createClothes(req, res) {
     let obj = req.body;
+//   console.log(obj);
+//     res.send(obj);
     let newClothes = await Clothes.create(obj);
     res.status(201).json(newClothes);
 }
